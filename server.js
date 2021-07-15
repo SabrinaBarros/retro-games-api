@@ -1,9 +1,36 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const pack = require('./package.json');
+const mongoose = require('mongoose');
 const games = require('./mocks/games.json');
+require('dotenv').config();
 
 const app = express();
+
+// ===============
+// Database
+// ===============
+
+mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true});
+
+mongoose.connection.on('connected', () => {
+
+  console.log('mongoDB connected');
+
+});
+
+mongoose.connection.on('disconneted', () => {
+
+  console.log('mongoDB disconncted');
+
+})
+
+mongoose.connection.on('error', error => {
+
+  console.log('mongoDB error');
+  console.log(error);
+
+});
 
 // ===============
 // Middleware

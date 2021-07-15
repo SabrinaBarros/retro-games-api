@@ -33,6 +33,7 @@ $ npm install
 ```
 $ npm start
 ```
+2 - Configure your environment following the [.env.example](.env.example) file.
 
 ## All automatic tasks
 

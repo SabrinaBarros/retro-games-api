@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const pack = require('./package.json');
 const mongoose = require('mongoose');
-const games = require('./mocks/games.json');
+const Games = require('./models/Games');
 require('dotenv').config();
 
 const app = express();
@@ -66,11 +66,16 @@ app.post('/games', (req, res) => {
   console.log('POST: /games');
   console.log(req.body);
 
-  res
+  const game = new Games(req.body);
+  game.save().then((game) => {
+
+    res
     .status(201)
     .json({
-      id: 123
+      id: game._id
     });
+
+  });
 
 });
 
@@ -82,9 +87,31 @@ app.get('/games', (req, res) => {
 
   console.log('GET: /games');
 
-  res
-    .status(200)
-    .json(games);
+  Games.find().exec((error, games) => {
+
+    res
+      .status(200)
+      .json(games);
+
+  });
+
+});
+
+// =========
+// Request a single game
+// =========
+
+app.get('/games/:id', (req, res) => {
+
+  console.log('GET: /games');
+
+  Games.findById(req.params.id).exec((error, game) => {
+
+    res
+      .status(200)
+      .json(game);
+
+  });
 
 });
 
@@ -98,11 +125,15 @@ app.put('/games', (req, res) => {
   console.log(req.query);
   console.log(req.body);
 
-  res
-    .status(200)
-    .json({
-      id: req.query.id
-    });
+  Games.findOneAndUpdate({_id: req.query.id}, req.body, {new: true}).exec((error, game) => {
+
+    res
+      .status(200)
+      .json({
+        id: game._id
+      });
+
+  });
 
 });
 
@@ -115,11 +146,15 @@ app.delete('/games', (req, res) => {
   console.log('DELETE: /games');
   console.log(req.query);
 
-  res
+  Games.findOneAndDelete({_id: req.query.id}).exec((error, game) => {
+
+    res
     .status(200)
     .json({
-      id: req.query.id
+      id: game._id
     });
+
+  });
 
 });
 

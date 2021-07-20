@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const pack = require('./package.json');
 const mongoose = require('mongoose');
 const Games = require('./models/Games');
+const logger = require('./middlewares/logger');
 require('dotenv').config();
 
 const app = express();
@@ -37,6 +38,7 @@ mongoose.connection.on('error', error => {
 // ===============
 
 app.use(bodyParser.json());
+app.use(logger);
 
 // ===============
 // Resource: /

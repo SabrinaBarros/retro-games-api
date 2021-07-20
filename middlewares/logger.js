@@ -1,6 +1,8 @@
+const debugMiddle = require('debug')('middleware');
+
 const logger = (req, res, next) => {
 
-    console.log('Im bitch, Im boss');
+    debugMiddle('Im bitch, Im boss');
 
     next();
 

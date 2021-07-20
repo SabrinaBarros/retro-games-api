@@ -4,6 +4,10 @@ const pack = require('./package.json');
 const mongoose = require('mongoose');
 const Games = require('./models/Games');
 const logger = require('./middlewares/logger');
+const { init } = require('./models/Games');
+const debugMongodb = require('debug')('mongodb');
+const debugRequest = require('debug')('request');
+const debugInit = require('debug')('init');
 require('dotenv').config();
 
 const app = express();
@@ -16,20 +20,20 @@ mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopolo
 
 mongoose.connection.on('connected', () => {
 
-  console.log('mongoDB connected');
+  debugMongodb('mongoDB connected');
 
 });
 
 mongoose.connection.on('disconneted', () => {
 
-  console.log('mongoDB disconncted');
+  debugMongodb('mongoDB disconncted');
 
-})
+});
 
 mongoose.connection.on('error', error => {
 
-  console.log('mongoDB error');
-  console.log(error);
+  debugMongodb('mongoDB error');
+  console.error(error);
 
 });
 
@@ -46,7 +50,7 @@ app.use(logger);
 
 app.get('/', (req, res) => {
 
-  console.log('GET: /');
+  debugRequest('GET: /');
 
   res.json({
     status: 'OK',
@@ -65,8 +69,8 @@ app.get('/', (req, res) => {
 
 app.post('/games', (req, res) => {
 
-  console.log('POST: /games');
-  console.log(req.body);
+  debugRequest('POST: /games');
+  debugRequest(req.body);
 
   const game = new Games(req.body);
   game.save().then((game) => {
@@ -87,7 +91,7 @@ app.post('/games', (req, res) => {
 
 app.get('/games', (req, res) => {
 
-  console.log('GET: /games');
+  debugRequest('GET: /games');
 
   Games.find().exec((error, games) => {
 
@@ -105,7 +109,7 @@ app.get('/games', (req, res) => {
 
 app.get('/games/:id', (req, res) => {
 
-  console.log('GET: /games');
+  debugRequest('GET: /games');
 
   Games.findById(req.params.id).exec((error, game) => {
 
@@ -123,9 +127,9 @@ app.get('/games/:id', (req, res) => {
 
 app.put('/games', (req, res) => {
 
-  console.log('PUT: /games');
-  console.log(req.query);
-  console.log(req.body);
+  debugRequest('PUT: /games');
+  debugRequest(req.query);
+  debugRequest(req.body);
 
   Games.findOneAndUpdate({_id: req.query.id}, req.body, {new: true}).exec((error, game) => {
 
@@ -145,8 +149,8 @@ app.put('/games', (req, res) => {
 
 app.delete('/games', (req, res) => {
 
-  console.log('DELETE: /games');
-  console.log(req.query);
+  debugRequest('DELETE: /games');
+  debugRequest(req.query);
 
   Games.findOneAndDelete({_id: req.query.id}).exec((error, game) => {
 
@@ -166,6 +170,6 @@ app.delete('/games', (req, res) => {
 
 app.listen(3000, () => {
 
-  console.log('I working bitch');
+  debugInit('I working bitch');
 
 });

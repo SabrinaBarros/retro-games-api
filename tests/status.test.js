@@ -1,7 +1,6 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const pack = require('../package.json')
-const debugTest = require('debug')('test');
+const pack = require('../package.json');
 const expect = chai.expect;
 
 const app = require('../server');
@@ -10,7 +9,7 @@ chai.use(chaiHttp);
 
 describe('Should return API status', () => {
 
-  test('Should return correct status-code', done => {
+  it('Should return correct status-code', done => {
 
     chai.request(app).get('/').end((error, res) => {
 
@@ -20,9 +19,9 @@ describe('Should return API status', () => {
 
     });
 
-  })
+  });
 
-  test('Should return version', done => {
+  it('Should return version', done => {
 
     chai.request(app).get('/').end((error, res) => {
 
@@ -36,7 +35,7 @@ describe('Should return API status', () => {
 
   });
 
-  test('Should return OK', done => {
+  it('Should return OK', done => {
 
     chai.request(app).get('/').end((error, res) => {
 

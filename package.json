@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "npm test",
+    "test": "DEBUG=test node node_modules/.bin/jest --watchAll",
     "start": "DEBUG=mongodb,request,init,middleware node_modules/.bin/nodemon server.js"
   },
   "repository": {
@@ -24,7 +24,10 @@
     "mongoose": "^5.13.2"
   },
   "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
     "debug": "^4.3.2",
+    "jest": "^27.0.6",
     "nodemon": "^2.0.12"
   }
 }

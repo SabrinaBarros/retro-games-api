@@ -173,3 +173,5 @@ app.listen(3000, () => {
   debugInit('I working bitch');
 
 });
+
+module.exports = app;

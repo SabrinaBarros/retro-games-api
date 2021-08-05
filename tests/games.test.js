@@ -1,13 +1,23 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const Games = require('../models/Games');
 const debugTest = require('debug')('test');
-const expect = chai.expect;
-
+const cleanColletion = require('./helpers/cleanColletion');
 const app = require('../server');
+
+const expect = chai.expect;
 
 chai.use(chaiHttp);
 
 describe('/games', () => {
+
+  beforeEach(done => {
+    cleanColletion(Games, 'Before', done);
+  });
+
+  afterEach(done => {
+    cleanColletion(Games, 'After', done);
+  });
 
   it('Should create a new game', done => {
 

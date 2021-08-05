@@ -4,8 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "DEBUG=test node node_modules/.bin/mocha ./tests/*.test.js --exit",
-    "start": "DEBUG=mongodb,request,init,middleware node_modules/.bin/nodemon server.js"
+    "test": "NODE_ENV=test DEBUG=test,mongodb node node_modules/.bin/mocha ./tests/*.test.js --exit",
+    "start": "NODE_ENV=development DEBUG=mongodb,request,init,middleware node_modules/.bin/nodemon server.js",
+    "server": "NODE_ENV=production DEBUG=mongodb,request,init,middleware node server.js"
   },
   "repository": {
     "type": "git",

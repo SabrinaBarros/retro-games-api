@@ -1,14 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const pack = require('./package.json');
-const mongoose = require('mongoose');
 const Games = require('./models/Games');
 const logger = require('./middlewares/logger');
-const { init } = require('./models/Games');
-const debugMongodb = require('debug')('mongodb');
 const debugRequest = require('debug')('request');
 const debugInit = require('debug')('init');
-require('dotenv').config();
+const connectMongoDB = require('./db/connectMongoDB');
 
 const app = express();
 
@@ -16,26 +13,7 @@ const app = express();
 // Database
 // ===============
 
-mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true});
-
-mongoose.connection.on('connected', () => {
-
-  debugMongodb('mongoDB connected');
-
-});
-
-mongoose.connection.on('disconneted', () => {
-
-  debugMongodb('mongoDB disconncted');
-
-});
-
-mongoose.connection.on('error', error => {
-
-  debugMongodb('mongoDB error');
-  console.error(error);
-
-});
+connectMongoDB();
 
 // ===============
 // Middleware

@@ -1,6 +1,6 @@
 const debugTest = require('debug')('test');
 
-const populateColletion = (collection, done) => {
+const populateColletion = (collection, singleGame, done) => {
 
   const mock = [
     {
@@ -19,7 +19,9 @@ const populateColletion = (collection, done) => {
     }
   ];
 
-  collection.create(mock).then(() => {
+  collection.create(mock).then(games => {
+
+    singleGame.id = games[1]._id;
 
     debugTest('successfully populate Games collection');
 

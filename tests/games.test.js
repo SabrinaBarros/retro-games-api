@@ -5,7 +5,6 @@ const debugTest = require('debug')('test');
 const cleanColletion = require('./helpers/cleanColletion');
 const populateColletion = require('./helpers/populateColletion');
 const app = require('../server');
-const { before } = require('mocha');
 
 const expect = chai.expect;
 
@@ -13,12 +12,14 @@ chai.use(chaiHttp);
 
 describe('/games', () => {
 
+  const singleGame = {};
+
   before(done => {
     cleanColletion(Games, 'Before', done);
   })
 
   beforeEach(done => {
-    populateColletion(Games, done);
+    populateColletion(Games, singleGame, done);
   });
 
   afterEach(done => {
@@ -68,6 +69,31 @@ describe('/games', () => {
 
       expect(res.body[0]).to.have.property('collections');
       expect(res.body[0].collections).to.be.a('array');
+
+      done();
+
+    });
+
+  });
+
+  it('Should retrieval a single game', done => {
+
+    chai.request(app).get('/games/' + singleGame.id).end((error, res) => {
+
+      expect(res.status).to.equal(200);
+      expect(res.body).to.be.a('object');
+      expect(res.body).to.be.not.empty;
+
+      expect(res.body).to.have.property('_id');
+      expect(res.body._id).to.be.not.empty;
+
+      expect(res.body.title).to.be.equal('Castlevania: Symphony of the Night');
+      expect(res.body.plataform).to.be.equal('PlayStation');
+      expect(res.body.condition).to.be.equal('In Box');
+      expect(res.body.repro).to.be.true;
+      expect(res.body.collections).to.be.a('array').with.lengthOf(2);
+      expect(res.body.collections).to.include('Castlevania');
+      expect(res.body.collections).to.include('Metroidvania');
 
       done();
 

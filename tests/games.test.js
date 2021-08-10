@@ -104,4 +104,39 @@ describe('/games', () => {
 
   });
 
+  it('Should update a single game', done => {
+
+    const body = {
+      "title": "Pokemon Soul Silver",
+      "plataform": "Nintendo DS",
+      "condition": "CIB",
+      "repro": false,
+      "collections": ["Pokemon", "Expensive", "Portable"]
+    }
+
+    chai.request(app).put('/games?id=' + singleGame.id).send(body).end((error, res) => {
+
+      expect(res.status).to.equal(200);
+
+      Games.findById(singleGame.id).exec((error, game) => {
+
+        expect(game).to.be.a('object');
+        expect(game).to.be.not.empty;
+        expect(game.title).to.be.equal('Pokemon Soul Silver');
+        expect(game.plataform).to.be.equal('Nintendo DS');
+        expect(game.condition).to.be.equal('CIB');
+        expect(game.repro).to.be.false;
+        expect(game.collections).to.be.a('array').with.lengthOf(3);
+        expect(game.collections).to.include('Pokemon');
+        expect(game.collections).to.include('Expensive');
+        expect(game.collections).to.include('Portable');
+
+        done();
+
+      });
+
+    });
+
+  });
+
 });

@@ -5,7 +5,7 @@ const schema = mongoose.Schema({
   plataform: String,
   condition: String,
   repro: Boolean,
-  colections: Array,
+  collections: Array,
 });
 
 const Games = mongoose.model('Games', schema);

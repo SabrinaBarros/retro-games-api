@@ -51,8 +51,11 @@ describe('/games', () => {
     chai.request(app).get('/games').end((error, res) => {
 
       expect(res.status).to.equal(200);
-      expect(res.body).to.be.a('array');
+      expect(res.body).to.be.a('array').with.lengthOf([2]);
       expect(res.body).to.be.not.empty;
+
+      expect(res.body[0]).to.have.property('_id');
+      expect(res.body[0]._id).to.be.not.empty;
 
       expect(res.body[0]).to.have.property('title');
       expect(res.body[0].title).to.be.a('string');
@@ -68,7 +71,7 @@ describe('/games', () => {
       expect(res.body[0].repro).to.be.a('boolean');
 
       expect(res.body[0]).to.have.property('collections');
-      expect(res.body[0].collections).to.be.a('array');
+      expect(res.body[0].collections).to.be.a('array').with.lengthOf(1);
 
       done();
 

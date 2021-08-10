@@ -139,4 +139,25 @@ describe('/games', () => {
 
   });
 
+  it('Should delete a single game', done => {
+
+    chai.request(app).delete('/games?id=' + singleGame.id).end((error, res) => {
+
+      expect(res.status).to.equal(200);
+
+      expect(res.body).to.have.property('id');
+      expect(res.body.id).to.be.not.empty;
+
+      Games.find().exec((error, games) => {
+
+        expect(games).to.be.a('array').with.lengthOf(1);
+
+        done();
+
+      });
+
+    });
+
+  });
+
 });

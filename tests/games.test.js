@@ -51,7 +51,7 @@ describe('/games', () => {
     chai.request(app).get('/games').end((error, res) => {
 
       expect(res.status).to.equal(200);
-      expect(res.body).to.be.a('array').with.lengthOf([2]);
+      expect(res.body).to.be.a('array').with.lengthOf(2);
       expect(res.body).to.be.not.empty;
 
       expect(res.body[0]).to.have.property('_id');
@@ -117,6 +117,9 @@ describe('/games', () => {
     chai.request(app).put('/games?id=' + singleGame.id).send(body).end((error, res) => {
 
       expect(res.status).to.equal(200);
+      
+      expect(res.body).to.have.property('id');
+      expect(res.body.id).to.be.not.empty;
 
       Games.findById(singleGame.id).exec((error, game) => {
 

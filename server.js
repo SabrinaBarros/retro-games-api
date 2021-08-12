@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const pack = require('./package.json');
-const Games = require('./models/Games');
 const logger = require('./middlewares/logger');
 const debugRequest = require('debug')('request');
 const debugInit = require('debug')('init');
 const connectMongoDB = require('./db/connectMongoDB');
+const gamesControllers = require('./controllers/gamesControllers');
 
 const app = express();
 
@@ -41,106 +41,15 @@ app.get('/', (req, res) => {
 // Resource: /games
 // ===============
 
-// =========
-// Create a new game
-// =========
+app.post('/games', gamesControllers.create);
 
-app.post('/games', (req, res) => {
+app.get('/games', gamesControllers.retrievalAll);
 
-  debugRequest('POST: /games');
-  debugRequest(req.body);
+app.get('/games/:id', gamesControllers.retrieval);
 
-  const game = new Games(req.body);
-  game.save().then((game) => {
+app.put('/games', gamesControllers.update);
 
-    res
-    .status(201)
-    .json({
-      id: game._id
-    });
-
-  });
-
-});
-
-// =========
-// Request game list
-// =========
-
-app.get('/games', (req, res) => {
-
-  debugRequest('GET: /games');
-
-  Games.find().exec((error, games) => {
-
-    res
-      .status(200)
-      .json(games);
-
-  });
-
-});
-
-// =========
-// Request a single game
-// =========
-
-app.get('/games/:id', (req, res) => {
-
-  debugRequest('GET: /games');
-
-  Games.findById(req.params.id).exec((error, game) => {
-
-    res
-      .status(200)
-      .json(game);
-
-  });
-
-});
-
-// =========
-// Update a single game
-// =========
-
-app.put('/games', (req, res) => {
-
-  debugRequest('PUT: /games');
-  debugRequest(req.query);
-  debugRequest(req.body);
-
-  Games.findOneAndUpdate({_id: req.query.id}, req.body, {new: true}).exec((error, game) => {
-
-    res
-      .status(200)
-      .json({
-        id: game._id
-      });
-
-  });
-
-});
-
-// =========
-// Delete a single game
-// =========
-
-app.delete('/games', (req, res) => {
-
-  debugRequest('DELETE: /games');
-  debugRequest(req.query);
-
-  Games.findOneAndDelete({_id: req.query.id}).exec((error, game) => {
-
-    res
-    .status(200)
-    .json({
-      id: game._id
-    });
-
-  });
-
-});
+app.delete('/games', gamesControllers.remove);
 
 // ===============
 // Start server

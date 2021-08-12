@@ -112,12 +112,11 @@ describe('/games', () => {
       "condition": "CIB",
       "repro": false,
       "collections": ["Pokemon", "Expensive", "Portable"]
-    }
+    };
 
     chai.request(app).put('/games?id=' + singleGame.id).send(body).end((error, res) => {
 
       expect(res.status).to.equal(200);
-      
       expect(res.body).to.have.property('id');
       expect(res.body.id).to.be.not.empty;
 

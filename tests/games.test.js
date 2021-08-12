@@ -1,7 +1,6 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const Games = require('../models/Games');
-const debugTest = require('debug')('test');
 const cleanColletion = require('./helpers/cleanColletion');
 const populateColletion = require('./helpers/populateColletion');
 const app = require('../server');

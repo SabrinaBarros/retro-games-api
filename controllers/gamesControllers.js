@@ -1,14 +1,12 @@
 const debugRequest = require('debug')('request');
-const Games = require('../models/Games');
+const gamesServices = require('../services/gameServices');
 
 const create = async (req, res) => {
 
   debugRequest('POST: /games');
   debugRequest(req.body);
 
-  const game = new Games(req.body);
-
-  const gameSaved = await game.save();
+  const gameSaved = await gamesServices.create(res.body);
 
   res
     .status(201)
@@ -22,7 +20,7 @@ const retrievalAll = async (req, res) => {
 
   debugRequest('GET: /games');
 
-  const games = await Games.find();
+  const games = await gamesServices.retrievalAll();
 
   res
     .status(200)
@@ -34,7 +32,7 @@ const retrieval = async (req, res) => {
 
   debugRequest('GET: /games');
 
-  const game = await Games.findById(req.params.id);
+  const game = await gamesServices.retrieval(req.params.id);
 
   res
     .status(200)
@@ -48,7 +46,7 @@ const update = async (req, res) => {
   debugRequest(req.query);
   debugRequest(req.body);
 
-  const game = await Games.findOneAndUpdate({_id: req.query.id}, req.body, {new: true});
+  const game = await gamesServices.update(req.query.id, req.body);
 
   res
     .status(200)
@@ -63,7 +61,7 @@ const remove = async (req, res) => {
   debugRequest('DELETE: /games');
   debugRequest(req.query);
 
-  const game = await Games.findOneAndDelete({_id: req.query.id});
+  const game = await gamesServices.remove(req.query.id);
 
   res
     .status(200)

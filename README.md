@@ -38,7 +38,7 @@ $ npm start
 ## All automatic tasks
 
 - `npm start` - Start API and watch files for reload (*development*).
-- `npm test` - Run unit tests.
+- `npm test` - Run integration tests.
 - `npm run server` - Start API (*production*).
 
 ## Versioning

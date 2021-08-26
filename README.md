@@ -1,5 +1,7 @@
 # Retro games API 👾
 
+> 🎮 Node.js RESTfull API for games collectors! Organize and manage all your games. 👾
+
 [![licence mit](https://img.shields.io/badge/licence-MIT-brightgreen.svg)](https://github.com/SabrinaBarros/hiwari/blob/master/LICENSE.md)
 
 ## Development
@@ -28,22 +30,30 @@ $ cd retro-games-api
 $ npm install
 ```
 
-3 - Start the project
+3 - Configure your environment following the [.env.example](.env.example) file.
+
+4 - Start the project:
 
 ```
 $ npm start
 ```
-2 - Configure your environment following the [.env.example](.env.example) file.
+
+## Code style
+
+💅🏻 If you are beautiful (inside) follow the [Beautiful JavaScript Code Style Guide](https://github.com/SabrinaBarros/beautiful-code-style-guide/blob/main/JSstyleGuide.md)!
 
 ## All automatic tasks
 
 - `npm start` - Start API and watch files for reload (*development*).
 - `npm test` - Run integration tests.
 - `npm run server` - Start API (*production*).
+- `npm run lint` - Run ESlint validations for code quality.
+
 
 ## Versioning
 
 To keep better organization of releases we follow the [Semantic Versioning 2.0.0](http://semver.org/) guidelines.
+
 
 ## License
 

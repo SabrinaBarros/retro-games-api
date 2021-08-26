@@ -6,7 +6,8 @@
   "scripts": {
     "test": "NODE_ENV=test DEBUG=test,mongodb node node_modules/.bin/mocha ./tests/*.test.js --exit",
     "start": "NODE_ENV=development DEBUG=mongodb,request,init,middleware node_modules/.bin/nodemon server.js",
-    "server": "NODE_ENV=production DEBUG=mongodb,request,init,middleware node server.js"
+    "server": "NODE_ENV=production DEBUG=mongodb,request,init,middleware node server.js",
+    "lint": "node_modules/.bin/eslint ."
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
     "debug": "^4.3.2",
+    "eslint": "^7.32.0",
     "mocha": "^9.0.3",
     "nodemon": "^2.0.12"
   }

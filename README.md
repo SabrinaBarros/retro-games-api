@@ -1,8 +1,10 @@
 # Retro games API 👾
 
-> 🎮 Node.js RESTfull API for games collectors! Organize and manage all your games. 👾
+> 🎮 Node.js RESTfull API for game collectors! Organize and manage all your games. 👾
 
 [![licence mit](https://img.shields.io/badge/licence-MIT-brightgreen.svg)](https://github.com/SabrinaBarros/hiwari/blob/master/LICENSE.md)
+
+![Mario Gamer](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8qiycbfxvm1w0rdi7ee3.gif)
 
 ## Development
 
@@ -58,3 +60,5 @@ To keep better organization of releases we follow the [Semantic Versioning 2.0.0
 ## License
 
 [MIT License](https://github.com/SabrinaBarros/hiwari/blob/master/LICENSE.md) © [Sabrina Barros](https://github.com/SabrinaBarros)
+
+![Game Over](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/najirean5s711ttbtw4s.gif)

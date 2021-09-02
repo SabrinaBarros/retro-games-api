@@ -42,7 +42,7 @@ $ npm start
 
 ## Code style
 
-💅🏻 If you are beautiful (inside) follow the [Beautiful JavaScript Code Style Guide](https://github.com/SabrinaBarros/beautiful-code-style-guide/blob/main/JSstyleGuide.md)!
+💅🏻 If you are beautiful (inside) follow the [Beautiful JavaScript Code Style Guide](https://github.com/SabrinaBarros/beautiful-code-style-guide/blob/main/JavaScript/JSstyleGuide.md)!
 
 ## All automatic tasks
 

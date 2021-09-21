@@ -59,6 +59,6 @@ To keep better organization of releases we follow the [Semantic Versioning 2.0.0
 
 ## License
 
-[MIT License](https://github.com/SabrinaBarros/hiwari/blob/master/LICENSE.md) © [Sabrina Barros](https://github.com/SabrinaBarros)
+[MIT License](https://github.com/SabrinaBarros/retro-games-api/blob/master/LICENSE.md) © [Sabrina Barros](https://github.com/SabrinaBarros)
 
 ![Game Over](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/najirean5s711ttbtw4s.gif)

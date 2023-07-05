@@ -1,4 +1,4 @@
-# Retro games API 👾
+## Retro games API 👾
 
 > 🎮 Node.js RESTfull API for game collectors! Organize and manage all your games. 👾
 
